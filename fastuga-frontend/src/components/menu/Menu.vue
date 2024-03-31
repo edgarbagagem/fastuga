@@ -9,6 +9,7 @@ const socket = inject('socket')
 const router = useRouter()
 const axios = inject('axios')
 const toast = inject('toast')
+const serverBaseUrl = inject("serverBaseUrl");
 const props = defineProps({
   id: {
     type: Number,
@@ -77,7 +78,7 @@ const save = () => {
       data.delete('photo_file')
     }
     axiosForm.defaults.headers.common.Authorization = "Bearer " + sessionStorage.getItem('token')
-    axiosForm.post('http://fastugaserver.test/api/menu/create', data, {
+    axiosForm.post(serverBaseUrl + '/api/menu/create', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

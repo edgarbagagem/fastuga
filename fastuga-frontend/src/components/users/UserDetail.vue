@@ -3,7 +3,6 @@ import { ref, watch, computed, inject } from "vue";
 import avatarNoneUrl from '@/assets/avatar-none.png'
 import axios from 'axios';
 import { useUserStore } from "../../stores/user";
-
 const serverBaseUrl = inject("serverBaseUrl");
 
 const props = defineProps({
@@ -63,7 +62,7 @@ const onFileUpload = () => {
     var formdata = new FormData()
     formdata.append('photo_file', editingUser.value.photo_file)
     axios.defaults.headers.common.Authorization = "Bearer " + sessionStorage.getItem('token')
-    axios.post('http://fastugaserver.test/api/users/' + editingUser.value.id + '/photo', formdata, {
+    axios.post( serverBaseUrl + '/api/users/' + editingUser.value.id + '/photo', formdata, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: nginx/Dockerfile
     ports: 
-      - "8080:80"
+      - "80:80"
     networks:
       - internal
     volumes:
@@ -17,7 +17,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: php/Dockerfile
+      dockerfile: fastuga-backend/php/Dockerfile
     networks:
     - internal
     volumes:
@@ -58,4 +58,3 @@ services:
 networks:
   internal:
     driver: bridge
-

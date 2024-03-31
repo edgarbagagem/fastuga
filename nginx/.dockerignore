@@ -1,0 +1,5 @@
+/fastuga-frontend/dist
+/fastuga-frontend/node_modules
+/fastuga-frontend/.env.production
+/fastuga-frontend/.vscode
+/fastuga-frontend/.gitignore

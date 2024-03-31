@@ -8,7 +8,7 @@ import EmployeeStats from './EmployeeStats.vue'
 
 import axiosForCreate from 'axios'
 import { useUserStore } from '../../stores/user';
-
+const serverBaseUrl = inject("serverBaseUrl");
 const router = useRouter()
 const axios = inject('axios')
 const toast = inject('toast')
@@ -142,7 +142,7 @@ const save = () => {
       data.append('default_payment_type', user.value.default_payment_type)
     }
 
-    axiosForCreate.post('http://fastugaserver.test/api/users/register', data, {
+    axiosForCreate.post( serverBaseUrl + '/api/users/register', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

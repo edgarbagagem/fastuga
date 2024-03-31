@@ -6,7 +6,8 @@ import axios from 'axios'
 
 import avatarNoneUrl from '@/assets/avatar-none.png'
 
-const serverBaseUrl = inject("serverBaseUrl")
+const serverBaseUrl = inject("serverBaseUrl");
+
 
 const props = defineProps({
   produto: {
@@ -60,7 +61,7 @@ const onFileUpload = () => {
     formdata.append('photo_file', editingProduct.value.photo_file)
     console.log(formdata);
     axios.defaults.headers.common.Authorization = "Bearer " + sessionStorage.getItem('token')
-    axios.post('http://fastugaserver.test/api/products/' + editingProduct.value.id + '/photo', formdata, {
+    axios.post( serverBaseUrl + '/api/products/' + editingProduct.value.id + '/photo', formdata, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
