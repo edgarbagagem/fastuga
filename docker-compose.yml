@@ -4,12 +4,12 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
-    ports: 
+    ports:
       - "80:80"
     networks:
       - internal
     volumes:
-      - ./fastuga-backend/application/:/var/www/html/
+      - ./fastuga-backend/application/:/var/www/laravel-backend/
       - ./fastuga-backend/logs/nginx:/var/log/nginx/
     container_name: nginx
     depends_on:
@@ -19,18 +19,18 @@ services:
       context: .
       dockerfile: fastuga-backend/php/Dockerfile
     networks:
-    - internal
+      - internal
     volumes:
-    - ./fastuga-backend/application/:/var/www/html/
-    - ./fastuga-backend/logs/php.log:/var/log/fpm-php.www.log
+      - ./fastuga-backend/application/:/var/www/laravel-backend/
+      - ./fastuga-backend/logs/php.log:/var/log/fpm-php.www.log
     container_name: php
     depends_on:
       mysql:
         condition: service_healthy
     expose:
-    - "9000"
+      - "9000"
     command: >
-      bash -c "chmod +x /var/www/html/laravel_setup.sh && /var/www/html/laravel_setup.sh"
+      bash -c "chmod +x /var/www/laravel-backend/laravel_setup.sh && /var/www/laravel-backend/laravel_setup.sh"
 
   mysql:
     container_name: db
@@ -47,9 +47,13 @@ services:
     volumes:
       - ./fastuga-backend/db-data:/var/lib/mysql
     networks:
-    - internal
+      - internal
     healthcheck:
-      test: ["CMD-SHELL", "mysql --user=${DB_USERNAME} --password=${DB_PASSWORD} -e \"SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = '${DB_DATABASE}'\" | grep ${DB_DATABASE}"]
+      test:
+        [
+          "CMD-SHELL",
+          'mysql --user=${DB_USERNAME} --password=${DB_PASSWORD} -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = ''${DB_DATABASE}''" | grep ${DB_DATABASE}',
+        ]
       interval: 30s
       timeout: 10s
       retries: 3

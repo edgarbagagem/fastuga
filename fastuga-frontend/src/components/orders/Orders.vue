@@ -14,20 +14,17 @@ const orderItem = ref([])
 const items = ref([])
 
 const loadOrderItems = () => {
-  //console.log("refreshing...")
   axios.get('orders/items/' + userStore.userId + '?ticket=' + ticketNumberSearch.value + '&local=' + orderLocalNumberSearch.value)
     .then((response) => {
-      //console.log(response)
       items.value = response.data.data
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
     })
 
 }
 
 socket.on('updatedOrderItem', (orderItem) => {
-  // console.log("refeshing...")
   toast.success(`An item was updated! reloading...`)
   loadOrderItems()
 })

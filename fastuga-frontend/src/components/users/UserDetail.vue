@@ -71,7 +71,7 @@ const onFileUpload = () => {
         toast.success("Photo was updated successfully.")
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         toast.error(
           "Photo was not updated due to unknown server error!"
         )

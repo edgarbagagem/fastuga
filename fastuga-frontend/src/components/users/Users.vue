@@ -44,7 +44,7 @@ const loadUsers = () => {
       paginationData.value = response.data.meta
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
     })
 }
 
@@ -56,7 +56,6 @@ const deleteUser = (user) => {
   axios.delete('users/' + user.id, user)
     .then((response) => {
       toast.success('User deleted successfully')
-      console.log(user)
       socket.emit('deleteUser', user)
       loadUsers()
 

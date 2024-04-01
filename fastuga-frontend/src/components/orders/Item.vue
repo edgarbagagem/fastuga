@@ -41,8 +41,6 @@ const updateItem = (statusToUpdate) => {
     axios.put('orders/' + cloneItem.id, cloneItem)
         .then((response) => {
             cloneItem = response.data.data
-
-            console.log(cloneItem)
             if (cloneItem.status == 'R') {
                 socket.emit('hotDishReady', cloneItem);
             }

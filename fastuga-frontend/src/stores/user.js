@@ -15,7 +15,6 @@ export const useUserStore = defineStore('user', () => {
     socket.on('newHotDish', (product) => {
 
         toast.info("New hot dish ordered: " + product.name)
-        console.log(product)
 
     })
 
@@ -28,7 +27,6 @@ export const useUserStore = defineStore('user', () => {
     })
 
     socket.on('hotDishReady', (order) => {
-        console.log(order)
 
         toast.info("Hot dish ready")
 
@@ -43,7 +41,6 @@ export const useUserStore = defineStore('user', () => {
     })
 
     socket.on('updateUser', (updatedUser) => {
-        console.log(updatedUser)
         if (user.value?.id == updatedUser.id) {
             user.value = updatedUser
             toast.info('Your user profile has been changed!')
@@ -53,13 +50,11 @@ export const useUserStore = defineStore('user', () => {
     })
 
     socket.on('deleteUser', (updatedUser) => {
-        console.log(updatedUser)
         toast.info(`User profile #${updatedUser.id} (${updatedUser.name}) has been deleted!`)
 
     })
 
     socket.on('newUser', (updatedUser) => {
-        console.log(updatedUser)
         toast.info(`User #${updatedUser.id} (${updatedUser.name}) has been created!`)
 
     })
@@ -97,7 +92,7 @@ export const useUserStore = defineStore('user', () => {
                         user.value.default_payment_type = response.data.data.default_payment_type;
                         user.value.default_payment_reference = response.data.data.default_payment_reference;
                     }).catch((error) => {
-                        console.log(error)
+                        console.error(error)
                     })
             }
         } catch (error) {
@@ -118,7 +113,6 @@ export const useUserStore = defineStore('user', () => {
             axios.defaults.headers.common.Authorization = "Bearer " + response.data.access_token
             sessionStorage.setItem('token', response.data.access_token)
             await loadUser()
-            console.log(user.value)
             socket.emit('loggedIn', user.value)
             return true
         }
@@ -170,14 +164,12 @@ export const useUserStore = defineStore('user', () => {
 
     function calculatePoints(total) {
         user.value.points = user.value.points + Math.floor(total / 10);
-        console.log(user.value.points)
 
         axios.put('customers/' + userId.value + '/points', { points: user.value.points })
-            .then((response) => {
-                console.log("deu certo")
+            .then(() => { () => {}
             }).catch((error) => {
                 if (error) {
-                    console.log(error.response.status)
+                    console.error(error)
                 }
             })
     }
@@ -186,10 +178,9 @@ export const useUserStore = defineStore('user', () => {
         user.value.points = user.value.points - points
 
         axios.put('customers/' + userId.value + '/points', { points: user.value.points })
-            .then((response) => {
-                console.log("certo")
+            .then(() => {
             }).catch((error) => {
-                console.log("errado")
+                console.error(error)
             })
     }
 

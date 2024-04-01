@@ -1,15 +1,14 @@
 #!/bin/bash
 
-echo "Setting permissions for /var/www/html/storage and /var/www/html/bootstrap/cache..."
+echo "Setting permissions for /var/www/laravel-backend/storage..."
 
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
+chmod -R o+w /var/www/laravel-backend/storage
+chmod -R 775 /var/www/laravel-backend/storage
 echo "Permissions set."
 
 echo "Installing composer dependencies"
 
-cd /var/www/html
+cd /var/www/laravel-backend
 composer install
 
 echo "Generating application key"

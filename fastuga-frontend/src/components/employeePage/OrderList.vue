@@ -26,9 +26,7 @@ const updateItem = (statusToUpdate) => {
       break;
     case 'R':
       //check if any of the items is still preparing
-      //  console.log(orderInfo.value.length)
       for (let i = 0; i < props.products.length; i++) {
-        console.log(props.products[i].prod_stat)
         if (props.products[i].prod_stat != 'R') {
           toast.error('Order #' + props.item.id + ' was not updated due to the item "' + props.products[i].name + '" not being ready, wait for a chef!')
           return;
@@ -44,11 +42,9 @@ const updateItem = (statusToUpdate) => {
       break;
   }
 
-  //console.log(cloneItem)
   errors.value = null
   axios.put('order/' + cloneItem.id, cloneItem)
     .then((response) => {
-      console.log(response)
       cloneItem = response.data.data
 
       if (cloneItem.status == 'R') {

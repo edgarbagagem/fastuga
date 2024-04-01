@@ -27,10 +27,9 @@ const loadOrders = () => {
         .then((response) => {
             orders.value = response.data.data
             paginationData.value = response.data.meta
-            console.log(orders)
         })
         .catch((error) => {
-            console.log(error)
+            console.error(error)
             toast.error("Error getting orders from database")
         })
 }
@@ -60,7 +59,7 @@ const deleteClick = (order) => {
 
             toast.success('Payment Refunded')
         }).catch((error) => {
-            console.log(error)
+            console.error(error)
             if (error.response.status == 422) {
                 toast.error('Order not canceled. Payment was not refunded due to validation errors!')
 

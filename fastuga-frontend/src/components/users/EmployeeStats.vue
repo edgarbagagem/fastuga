@@ -25,7 +25,6 @@ const toast = inject('toast')
 const stats = ref(null)
 
 const loadStats = () => {
-    console.log(props.user)
     axios.get('users/' + props.user.id + '/stats?page=' + paginationPage.value)
         .then((response) => {
             stats.value = response.data

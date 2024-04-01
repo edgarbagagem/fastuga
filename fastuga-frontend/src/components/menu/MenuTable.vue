@@ -44,7 +44,6 @@ const loadProduct = () => {
 }
 
 const deleteProduct = (produto) => {
-  console.log(produto.id)
   axios.delete('menu/' + produto.id)
     .then((response) => {
       loadProduct()
@@ -52,7 +51,7 @@ const deleteProduct = (produto) => {
       toast.success('Product #' + produto.id + ' was deleted sucessfully.')
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       toast.error('Product #' + produto.id + ' was not deleted sucessfully.')
     })
   //VOLTAR A MOSTRAR OS PRODUTOS TODOS DEPOIS DE UM SER ELIMINADO

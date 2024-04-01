@@ -14,26 +14,22 @@ const items = ref([])
 const products = ref([])
 
 const loadOrders = () => {
-  //console.log("refreshing...")
 
   axios.get('orders/employee/' + userStore.user.id)
     .then((response) => {
-      //console.log(response)
       items.value = response.data.data
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
     })
 
 }
 
 socket.on('updatedOrder', (order) => {
-  // console.log("refeshing...")
   loadOrders()
 })
 
 socket.on('updatedOrderItem', (orderItem) => {
-  // console.log("refeshing...")
   loadOrders()
 })
 
@@ -43,16 +39,13 @@ socket.on('newOrder', () => {
 })
 
 const loadProducts = () => {
-  //console.log("refreshing...")
 
   axios.get("orders/employee/" + userStore.user.id + "/products")
     .then((response) => {
-      //console.log(response)
       products.value = response.data.data
-      //console.log(orderInfo.value)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
     })
 
 }

@@ -71,12 +71,12 @@ const loadUser = (id) => {
               originalValueStr = dataAsString()
               loadOrders()
             }).catch((error) => {
-              console.log(error)
+              console.error(error)
             })
         }
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       })
   }
   originalValueStr = dataAsString()
@@ -109,7 +109,7 @@ const save = () => {
         loadUser(user.value.id)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         if (error.response.status == 422) {
           toast.error('User #' + props.id + ' was not updated due to validation errors!')
           errors.value = error.response.data.errors
@@ -194,8 +194,6 @@ const leaveConfirmed = () => {
 onBeforeRouteLeave((to, from, next) => {
   nextCallBack = null
   let newValueStr = dataAsString()
-  console.log(originalValueStr)
-  console.log(newValueStr)
   if (originalValueStr != newValueStr) {
     nextCallBack = next
     confirmationLeaveDialog.value.show()

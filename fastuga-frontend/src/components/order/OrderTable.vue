@@ -133,15 +133,12 @@ const createPayment = () => {
                 }
             }
 
-
-            console.log(order.value)
             axios.post('orders', order.value)
                 .then((response) => {
                     order.value = response.data.data
                     socket.emit('newOrder')
                     var product = ref(null)
                     for (product of orderStore.productsInOrder) {
-                        console.log(product)
                         if (product.type == 'hot dish') {
                             socket.emit('newHotDish', product)
                         }

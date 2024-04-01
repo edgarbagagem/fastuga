@@ -61,12 +61,10 @@ export const useOrderStore = defineStore('order', () => {
         orderItem.value.products = productsInOrder.value
 
         axios.post('orders/items', orderItem.value)
-            .then((response) => {
-                console.log("DEU CERTO")
+            .then(() => {()=>{}
             }).catch((error) => {
                 if (error) {
-                    //console.log(error.response.status)
-                    console.log("DEU ERRADO")
+                    console.error(error)
                 }
             })
 

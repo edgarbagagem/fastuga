@@ -59,7 +59,6 @@ const onFileUpload = () => {
     //upload picture
     var formdata = new FormData()
     formdata.append('photo_file', editingProduct.value.photo_file)
-    console.log(formdata);
     axios.defaults.headers.common.Authorization = "Bearer " + sessionStorage.getItem('token')
     axios.post( serverBaseUrl + '/api/products/' + editingProduct.value.id + '/photo', formdata, {
       headers: {
@@ -70,7 +69,7 @@ const onFileUpload = () => {
         toast.success("Photo was updated successfully.")
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         toast.error(
           "Photo was not updated due to unknown server error!"
         )

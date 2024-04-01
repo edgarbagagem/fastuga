@@ -43,7 +43,7 @@ const loadProduct = (id) => {
         originalValueStr = dataAsString()
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       })
   }
 }
@@ -91,7 +91,7 @@ const save = () => {
         router.back()
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
         if (error.response.status == 422) {
           toast.error('Product was not created due to validation errors!')
           errors.value = error.response.data.errors

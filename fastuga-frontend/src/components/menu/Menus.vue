@@ -38,7 +38,7 @@ const loadProducts = () => {
       paginationData.value = response.data.meta
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
     })
 }
 
