@@ -1,18 +1,20 @@
 #!/bin/bash
+cd /var/www/laravel-backend
+echo "Setting permissions for storage and cache..."
 
-echo "Setting permissions for /var/www/laravel-backend/storage..."
-
-chmod -R o+w /var/www/laravel-backend/storage
-chmod -R 775 /var/www/laravel-backend/storage
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R o+w storage
+chmod -R 775 bootstrap/cache
+chmod -R 775 storage
 echo "Permissions set."
 
 echo "Installing composer dependencies"
 
-cd /var/www/laravel-backend
 composer install
 
 echo "Generating application key"
-
+rm -rf .env
+echo "APP_KEY=" > .env
 php artisan key:generate
 
 echo "Running database migrations"
