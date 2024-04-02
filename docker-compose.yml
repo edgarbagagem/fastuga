@@ -8,22 +8,24 @@ services:
       - "80:80"
     networks:
       - internal
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      VITE_API_DOMAIN: ${VITE_API_DOMAIN}
+      VITE_WS_CONNECTION: ${VITE_WS_CONNECTION}
     volumes:
-      - ./fastuga-backend/application/:/var/www/laravel-backend/
-      - ./fastuga-backend/logs/nginx:/var/log/nginx/
+      - laravel_assets:/var/www/laravel-backend/
     container_name: nginx
     depends_on:
       - php
   php:
     build:
-      context: .
-      dockerfile: fastuga-backend/php/Dockerfile
+      context: fastuga-backend/application/
+      dockerfile: Dockerfile
     networks:
       - internal
-    volumes:
-      - ./fastuga-backend/application/:/var/www/laravel-backend/
-      - ./fastuga-backend/logs/php.log:/var/log/fpm-php.www.log
     container_name: php
+    volumes:
+      - laravel_assets:/var/www/laravel-backend/
     environment:
       APP_NAME: ${APP_NAME}
       APP_ENV: ${APP_ENV}
@@ -77,3 +79,6 @@ services:
 networks:
   internal:
     driver: bridge
+
+volumes:
+  laravel_assets:

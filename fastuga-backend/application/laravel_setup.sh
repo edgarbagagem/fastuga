@@ -1,12 +1,5 @@
 #!/bin/bash
 cd /var/www/laravel-backend
-echo "Setting permissions for storage and cache..."
-
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R o+w storage
-chmod -R 775 bootstrap/cache
-chmod -R 775 storage
-echo "Permissions set."
 
 echo "Installing composer dependencies"
 
@@ -34,6 +27,7 @@ fi
 
 echo "Linking storage"
 php artisan storage:link
+chmod -R 775 storage/
 
 CLIENT_COUNT=$(php artisan tinker --execute="echo \Laravel\Passport\Client::count();")
 
@@ -43,6 +37,9 @@ if [ "$CLIENT_COUNT" -eq 0 ]; then
 else
   echo "Passport clients already exist."
 fi
+
+echo "Passport Keys"
+php artisan passport:keys --force
 
 
 exec php-fpm
