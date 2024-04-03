@@ -4,7 +4,7 @@ WORKDIR /app
 COPY fastuga-frontend/package*.json ./
 RUN npm install
 COPY fastuga-frontend .
-RUN echo -e "NODE_ENV=${NODE_ENV}\nVITE_API_DOMAIN=${VITE_API_DOMAIN}\nVITE_WS_CONNECTION=${VITE_WS_CONNECTION}" >> .env.production
+RUN echo -e "NODE_ENV=${NODE_ENV}\nVITE_API_DOMAIN=${VITE_API_DOMAIN}\nVITE_WS_CONNECTION=${VITE_WS_CONNECTION}" > .env.production
 RUN npm run build
 
 

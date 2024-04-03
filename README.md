@@ -9,7 +9,8 @@ docker compose up
 This deploys 3 containers:
 
 ```
-nginx -> Nginx web server
+nginx -> Nginx web server (Serves laravel and vue)
 php -> Container where the api runs
 db -> MySQL database
+websockets -> Node websocket server
 ```

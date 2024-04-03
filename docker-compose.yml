@@ -76,6 +76,16 @@ services:
       retries: 3
       start_period: 10s
 
+  websockets:
+    container_name: websockets
+    build:
+      context: fastuga-websockets/
+      dockerfile: Dockerfile
+    environment:
+      CORS_ORIGIN: ${CORS_ORIGIN}
+    networks:
+      - internal
+
 networks:
   internal:
     driver: bridge
