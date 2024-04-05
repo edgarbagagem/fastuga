@@ -13,15 +13,9 @@ class UsersSeeder extends Seeder
     private $photoPath = 'public/fotos';
     private $typesOfUsersDesc =  ['Manager', 'Chef', 'Delivery', 'Customer'];
     private $typesOfUsers =             ['EM', 'EC', 'ED', 'C'];
-
-// TESTING SEEDER
-//    private $numberOfUsers =            [4,    10,    10,   20];
-//    private $numberOfFixedUsers =       [2,    3,     3,    5];
-//    private $numberOfSoftDeletedUsers = [1,    4,     4,    4];
-
-    private $numberOfUsers =            [4,    10,    10,   200];
-    private $numberOfFixedUsers =       [2,    3,     3,    10];
-    private $numberOfSoftDeletedUsers = [1,    4,     4,    40];
+    private $numberOfUsers =            [4,    10,    10,   20];
+    private $numberOfFixedUsers =       [2,    3,     3,    5];
+    private $numberOfSoftDeletedUsers = [1,    4,     4,    5];
     private $paymentTypes = ['VISA', 'PAYPAL', 'MBWAY'];
     private $files_M = [];
     private $files_F = [];

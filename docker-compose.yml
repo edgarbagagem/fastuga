@@ -46,8 +46,6 @@ services:
         condition: service_healthy
     expose:
       - "9000"
-    command: >
-      bash -c "chmod +x /var/www/laravel-backend/laravel_setup.sh && /var/www/laravel-backend/laravel_setup.sh"
 
   mysql:
     container_name: db

@@ -20,3 +20,5 @@ RUN chown -R www-data:www-data /var/www
 RUN chmod -R 775 /var/www
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN ["chmod", "+x", "/var/www/laravel-backend/laravel_setup.sh"]
+ENTRYPOINT ["bash", "/var/www/laravel-backend/laravel_setup.sh" ]

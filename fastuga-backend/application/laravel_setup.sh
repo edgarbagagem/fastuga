@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 cd /var/www/laravel-backend
 
 echo "Installing composer dependencies"
@@ -6,8 +6,8 @@ echo "Installing composer dependencies"
 composer install
 
 echo "Generating application key"
-rm -rf .env
-echo "APP_KEY=" > .env
+
+echo "APP_KEY=" >| .env
 php artisan key:generate
 
 echo "Running database migrations"
@@ -27,6 +27,7 @@ fi
 
 echo "Linking storage"
 php artisan storage:link
+chown -R www-data:www-data storage/
 chmod -R 775 storage/
 
 CLIENT_COUNT=$(php artisan tinker --execute="echo \Laravel\Passport\Client::count();")
