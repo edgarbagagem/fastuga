@@ -35,44 +35,45 @@ services:
       LOG_CHANNEL: ${LOG_CHANNEL}
 
       DB_CONNECTION: ${DB_CONNECTION}
-      DB_HOST: ${DB_CONNECTION}
+      DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
 
-    depends_on:
-      mysql:
-        condition: service_healthy
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy\
     expose:
       - "9000"
 
-  mysql:
-    container_name: db
-    restart: always
-    image: mysql:latest
-    platform: linux/x86_64
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-    volumes:
-      - ./fastuga-backend/db-data:/var/lib/mysql
-    networks:
-      - internal
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          'mysql --user=${DB_USERNAME} --password=${DB_PASSWORD} -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = ''${DB_DATABASE}''" | grep ${DB_DATABASE}',
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
+  #Uncomment this and php container depends on for local container database, comment if using cloud database
+  # mysql:
+  #   container_name: db
+  #   restart: always
+  #   image: mysql:latest
+  #   platform: linux/x86_64
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+  #     MYSQL_USER: ${DB_USERNAME}
+  #     MYSQL_PASSWORD: ${DB_PASSWORD}
+  #     MYSQL_DATABASE: ${DB_DATABASE}
+  #   volumes:
+  #     - ./fastuga-backend/db-data:/var/lib/mysql
+  #   networks:
+  #     - internal
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD-SHELL",
+  #         'mysql --user=${DB_USERNAME} --password=${DB_PASSWORD} -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = ''${DB_DATABASE}''" | grep ${DB_DATABASE}',
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 10s
 
   websockets:
     container_name: websockets

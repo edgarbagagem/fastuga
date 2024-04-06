@@ -14,15 +14,16 @@ echo "Running database migrations"
 
 php artisan migrate
 
-echo "Checking if database needs seeding..."
-SEEDER_STATUS=$(php artisan tinker --execute="echo \App\Models\User::count();")
+#Uncomment if you want seeding
+# echo "Checking if database needs seeding..."
+# SEEDER_STATUS=$(php artisan tinker --execute="echo \App\Models\User::count();")
 
-if [ "$SEEDER_STATUS" -eq 0 ]; then
-  echo "No users found in the database. Seeding now..."
-  php artisan db:seed 
-else
-  echo "Database has already been seeded."
-fi
+# if [ "$SEEDER_STATUS" -eq 0 ]; then
+#   echo "No users found in the database. Seeding now..."
+#   php artisan db:seed 
+# else
+#   echo "Database has already been seeded."
+# fi
 
 
 echo "Linking storage"
