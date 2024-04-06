@@ -1,0 +1,6 @@
+.vscode
+fastuga-frontend/dist
+fastuga-frontend/node_modules
+fastuga-frontend/.gitignore
+fastuga-frontend/dist
+fastuga-frontend/node_modules
