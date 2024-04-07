@@ -1,9 +1,8 @@
+# Build frontend
+FROM node:lts-alpine as frontend-build-stage
 ARG NODE_ENV
 ARG VITE_API_DOMAIN
 ARG VITE_WS_CONNECTION
-
-# Build frontend
-FROM node:lts-alpine as frontend-build-stage
 WORKDIR /app
 COPY fastuga-frontend/package*.json ./
 RUN npm install
