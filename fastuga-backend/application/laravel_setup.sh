@@ -39,7 +39,9 @@ php artisan migrate
 echo "Linking storage"
 php artisan storage:link
 chown -R www-data:www-data storage/
+chown -R www-data:www-data boostrap/cache
 chmod -R 775 storage/
+chmod -R 775 boostrap/cache
 
 CLIENT_COUNT=$(php artisan tinker --execute="echo \Laravel\Passport\Client::count();")
 
@@ -53,4 +55,4 @@ fi
 echo "Passport Keys"
 php artisan passport:keys --force
 
-php artisan serve --host=0.0.0.0 --port 80
+php artisan serve --host=0.0.0.0 --port $PORT
