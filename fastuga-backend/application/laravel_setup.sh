@@ -6,8 +6,16 @@ echo "Installing composer dependencies"
 composer install
 
 echo "Generating application key"
-
-echo "APP_KEY=" >| .env
+rm -rf .env
+echo "APP_ENV=$APP_ENV" >> .env
+echo "APP_NAME=$APP_NAME" >> .env
+echo "APP_DEBUG=$APP_DEBUG" >> .env
+echo "APP_KEY=" >> .env
+echo "DB_CONNECTION=$DB_CONNECTION" >> .env
+echo "DB_HOST=$DB_HOST" >> .env
+echo "DB_DATABASE=$DB_DATABASE" >> .env
+echo "DB_USERNAME=$DB_USERNAME" >> .env
+echo "DB_PASSWORD=$DB_PASSWORD" >> .env
 php artisan key:generate
 
 echo "Running database migrations"
