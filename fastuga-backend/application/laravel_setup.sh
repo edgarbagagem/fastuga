@@ -18,6 +18,8 @@ echo "DB_USERNAME=$DB_USERNAME" >> .env
 echo "DB_PASSWORD=$DB_PASSWORD" >> .env
 php artisan key:generate
 
+cat .env
+
 echo "Running database migrations"
 
 php artisan migrate
