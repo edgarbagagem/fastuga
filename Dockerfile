@@ -1,13 +1,12 @@
 # Build frontend
 FROM node:lts-alpine as frontend-build-stage
-ARG NODE_ENV
 ARG VITE_API_DOMAIN
 ARG VITE_WS_CONNECTION
 WORKDIR /app
 COPY fastuga-frontend/package*.json ./
 RUN npm install
 COPY fastuga-frontend .
-RUN echo -e "NODE_ENV=${NODE_ENV}\nVITE_API_DOMAIN=${VITE_API_DOMAIN}\nVITE_WS_CONNECTION=${VITE_WS_CONNECTION}" > .env.production
+RUN echo -e "VITE_API_DOMAIN=${VITE_API_DOMAIN}\nVITE_WS_CONNECTION=${VITE_WS_CONNECTION}" > .env.production
 RUN npm run build
 
 
