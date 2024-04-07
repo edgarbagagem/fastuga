@@ -14,7 +14,7 @@ echo "Running database migrations"
 
 php artisan migrate
 
-#Uncomment if you want seeding
+#Uncomment if you want seeding (Recommended for better experience)
 # echo "Checking if database needs seeding..."
 # SEEDER_STATUS=$(php artisan tinker --execute="echo \App\Models\User::count();")
 

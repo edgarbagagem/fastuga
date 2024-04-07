@@ -4,14 +4,13 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
+      args:
+        - VITE_API_DOMAIN=${VITE_API_DOMAIN}
+        - VITE_WS_CONNECTION=${VITE_WS_CONNECTION}
     ports:
       - "80:80"
     networks:
       - internal
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      VITE_API_DOMAIN: ${VITE_API_DOMAIN}
-      VITE_WS_CONNECTION: ${VITE_WS_CONNECTION}
     volumes:
       - laravel_assets:/var/www/laravel-backend/
     container_name: nginx
@@ -40,7 +39,7 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
-
+      DB_SOCKET: ${DB_SOCKET}
     # depends_on:
     #   mysql:
     #     condition: service_healthy\
