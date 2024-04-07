@@ -15,7 +15,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-COPY fastuga-backend/application/ /var/www/laravel-backend/
+COPY fastuga-backend/application /var/www/laravel-backend/
 RUN chown -R www-data:www-data /var/www
 RUN chmod -R 775 /var/www
 # Get latest Composer
